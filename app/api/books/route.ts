@@ -7,13 +7,21 @@ export async function POST(req: Request) {
     await connectToDatabase();
     const { title, author, coverImage, pages } = await req.json();
 
-    const newBook = await Book.create({ title, author, coverImage, pages });
+    // Ensure each page has both image and audio
+    const formattedPages = pages.map((page: any) => ({
+      imageUrl: page.imageUrl,
+      audioUrl: page.audioUrl || "", // Ensure audioUrl exists, even if empty
+    }));
+
+    const newBook = await Book.create({ title, author, coverImage, pages: formattedPages });
 
     return NextResponse.json(newBook, { status: 201 });
   } catch (error) {
+    console.error("❌ Error adding book:", error);
     return NextResponse.json({ error: "Error adding book" }, { status: 500 });
   }
 }
+
 
 export async function GET() {
     try {
