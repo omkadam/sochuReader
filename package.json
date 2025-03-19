@@ -7,11 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate" : "node ./scripts/migration.js"
+    "migrate": "node ./scripts/migration.js"
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
     "lucide-react": "^0.479.0",
+    "mongodb": "^6.15.0",
     "mongoose": "^8.12.1",
     "next": "15.2.1",
     "postcss": "^8.5.3",
